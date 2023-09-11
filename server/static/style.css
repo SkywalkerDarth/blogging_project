@@ -1,0 +1,33 @@
+body {
+    background-color: #00FF00;
+}
+
+header img {
+    width: 50px;
+    height: auto;
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+    padding: 20px 0; /* space between images and boxes */
+}
+
+.image-container img {
+    width: 30%; /* Each image takes up 30% of the container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.stacked-boxes {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    margin-bottom: 10px;
+}
