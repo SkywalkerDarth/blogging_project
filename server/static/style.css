@@ -1,23 +1,24 @@
 body {
-    background-color: #00FF00;
+    background-color: #F5F5F5;
 }
 
 header img {
-    width: 50px;
+    width: 17%;
     height: auto;
 }
 
 .image-container {
     display: flex;
     justify-content: space-between;
-    width: 70%;
+    width: 85%;
     margin: auto;
-    padding: 20px 0; /* space between images and boxes */
+    padding: 20px; /* space between images and boxes */
+    margin-bottom: 20px;
 }
 
 .image-container img {
-    width: 30%; /* Each image takes up 30% of the container */
-    height: auto; /* Maintain aspect ratio */
+    width: 31%; /* Each image takes up 30% of the container */
+    height: auto; /* Height ratio */
 }
 
 .stacked-boxes {
