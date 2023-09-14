@@ -32,6 +32,17 @@ def get_user_by_id(user_id):
         print("Error: Unable to decode JSON data")
     return None
 
+def get_user_by_username(username):
+    try:
+        with open(DATA_FILE, 'r') as file:
+            users_data = json.load(file)
+            for user in users_data.get('users', []):
+                if user['username'] == username:
+                    return user
+    except (FileNotFoundError, json.JSONDecodeError):
+        print("Error: Unable to decode JSON data")
+    return None
+
 def read_users():
     try:
         with open(DATA_FILE, 'r') as file:
@@ -62,7 +73,7 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        user = get_user_by_id(username)
+        user = get_user_by_username(username)
 
         if user and bcrypt.check_password_hash(user['password'], password):
             login_user(User(user['id'], user['username']))
