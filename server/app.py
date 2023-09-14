@@ -3,22 +3,18 @@ from flask_login import LoginManager, login_user, login_required, UserMixin
 from flask_bcrypt import Bcrypt
 import json
 
-
 app = Flask(__name__)
 app.secret_key = '111'
 bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
 DATA_FILE = 'users.json'
-
 
 class User(UserMixin):
     def __init__(self, user_id, username):
         self.id = user_id
         self.username = username
-
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -26,7 +22,6 @@ def load_user(user_id):
     if user_data:
         return User(user_data['id'], user_data['username'])
     return None
-
 
 def get_user_by_id(user_id):
     try:
@@ -37,7 +32,6 @@ def get_user_by_id(user_id):
         print("Error: Unable to decode JSON data")
     return None
 
-
 def read_users():
     try:
         with open(DATA_FILE, 'r') as file:
@@ -46,29 +40,21 @@ def read_users():
     except (FileNotFoundError, json.JSONDecodeError):
         return []
 
-
-def write_user(user_id, user_data):
+def write_user(user_data):
     users = read_users()
     users.append(user_data)
     with open(DATA_FILE, 'w') as file:
         json.dump({'users': users}, file)
 
-
-def delete_user(user_id):
+def delete_user(username):
     users = read_users()
-    if user_id in users:
-        del users[user_id]
-        with open(DATA_FILE, 'w') as file:
-            json.dump(users, file)
-        return True
-    else:
-        return False
-
+    updated_users = [user for user in users if user['username'] != username]
+    with open(DATA_FILE, 'w') as file:
+        json.dump({'users': updated_users}, file)
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -76,7 +62,7 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        user = get_user_by_id(user_id)
+        user = get_user_by_id(username)
 
         if user and bcrypt.check_password_hash(user['password'], password):
             login_user(User(user['id'], user['username']))
@@ -87,8 +73,6 @@ def login():
             return render_template('login.html')
 
     return render_template('login.html')
-
-
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
@@ -105,28 +89,17 @@ def signup():
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         user = {'id': user_id, 'username': username, 'password': hashed_password}
 
-        write_user(user_id, user)
+        write_user(user)
         flash('Signup successful! Please log in.', 'success')
 
         return redirect(url_for('login'))
 
     return render_template('signup.html')
 
-
-
 @app.route('/dashboard')
 @login_required
 def dashboard():
     return render_template('dashboard.html')
 
-@app.route('/recovery')
-def recovery():
-    return render_template('recovery.html')
-
-@app.route('/login/first_page')
-def first_page():
-    return render_template('first_page.html')
-
 if __name__ == '__main__':
     app.run(debug=True)
-
