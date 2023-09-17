@@ -10,9 +10,9 @@ class UserManager:
         try:
             with open(self.DATA_FILE, 'r') as file:
                 users = json.load(file)
-                return users.get('users', [])
+                return users.get('users', {})
         except (FileNotFoundError, json.JSONDecodeError):
-            return []
+            return {}
 
     def write_users(self, users):
         with open(self.DATA_FILE, 'w') as file:
@@ -20,20 +20,22 @@ class UserManager:
 
     def get_user_by_id(self, user_id):
         users = self.read_users()
-        return next((user for user in users if user['id'] == user_id), None)
+        return users.get(user_id)
 
     def get_user_by_username(self, username):
         users = self.read_users()
-        return next((user for user in users if user['username'] == username), None)
+        return next((user for user in users.values() if user['username'] == username), None)
+
 
     def update_password(self, username, new_hashed_password):
         users = self.read_users()
-        updated_users = [{'id': user['id'], 'username': user['username'], 'password': new_hashed_password} if user['username'] == username else user for user in users]
+        updated_users = {user_id: {'id': user['id'], 'username': user['username'], 'password': new_hashed_password}
+                         for user_id, user in users.items() if user['username'] == username}
         self.write_users(updated_users)
 
     def delete_user(self, username):
         users = self.read_users()
-        updated_users = [user for user in users if user['username'] != username]
+        updated_users = {user_id: user for user_id, user in users.items() if user['username'] != username}
         self.write_users(updated_users)
 
     def generate_user_id(self):

@@ -3,7 +3,7 @@ from flask_login import LoginManager, login_user, login_required, UserMixin, log
 from user_manager import UserManager
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Replace with a secure secret key
+app.secret_key = '122333444455555666666777777788888888999999999'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -20,14 +20,14 @@ class User(UserMixin):
 def load_user(user_id):
     user_data = user_manager.get_user_by_id(user_id)
     if user_data:
-        return User(user_data['id'], user_data['username'], user_data['password'])
+        return User(user_id, user_data['username'], user_data['password'])
     return None
-
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -38,13 +38,15 @@ def login():
         user = user_manager.get_user_by_username(username)
 
         if user and user_manager.check_password(user['password'], password):
-            login_user(User(user['id'], user['username'], user['password']))
+            user_id = user['id']
+            login_user(User(user_id, username, user['password']))
             flash('Sign in successful!', 'success')
             return redirect(url_for('dashboard'))
         else:
             flash('Invalid username or password. Please try again.', 'error')
 
     return render_template('login.html')
+
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
@@ -59,16 +61,22 @@ def signup():
             hashed_password = user_manager.hash_password(password)
             user = {'id': user_id, 'username': username, 'password': hashed_password}
 
-            user_manager.write_user(user)
+            users = user_manager.read_users()
+            users[user_id] = user
+            user_manager.write_users(users)
+
             flash('Signup successful! Please log in.', 'success')
             return redirect(url_for('login'))
 
     return render_template('signup.html')
 
+
+
 @app.route('/dashboard')
 @login_required
 def dashboard():
     return render_template('dashboard.html', username=current_user.username)
+
 
 @app.route('/logout')
 @login_required
@@ -76,6 +84,7 @@ def logout():
     logout_user()
     flash('You have been logged out.', 'success')
     return redirect(url_for('index'))
+
 
 @app.route('/change_password', methods=['POST', 'GET'])
 @login_required
