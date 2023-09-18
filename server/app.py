@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import LoginManager, login_user, login_required, UserMixin, logout_user, current_user
 from user_manager import UserManager
 
@@ -72,11 +72,16 @@ def signup():
 
 
 
+@app.route('/api/get_username', methods=['GET'])
+@login_required
+def get_username():
+        return jsonify({'username': current_user.username})
+
+
 @app.route('/dashboard')
 @login_required
 def dashboard():
     return render_template('dashboard.html', username=current_user.username)
-
 
 @app.route('/logout')
 @login_required
