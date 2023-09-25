@@ -1,65 +1,35 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+    <div class="dashboard">
+        <section class="category red">
+            <a href="{{ url_for('engineering') }}">
+                <h2>Engineering</h2>
+            </a>
+        </section>
 
-<style>
-    .dashboard {
-        display: flex;
-        flex-wrap: wrap;
-        max-width: 800px;
-    }
+        <section class="category green">
+            <a href="{{ url_for('sports') }}">
+                <h2>History</h2>
+            </a>
+        </section>
 
-    .box {
-        flex: 0 0 calc(20% - 20px);
-        margin: 10px;
-        padding: 20px;
-        text-align: center;
-        color: white;
-        font-size: 1.2em;
-        font-weight: bold;
-        width: 80%; /* Set width to 80% of the parent container */
-        height: 10%; /* Set height to 10% of the parent container */
-    }
+        <section class="category yellow">
+            <a href="{{ url_for('history') }}">
+                <h2>Sciences</h2>
+            </a>
+        </section>
 
-    .red {
-        background-color: #FF4136; /* Red */
-    }
+        <section class="category blue">
+            <a href="{{ url_for('stories') }}">
+                <h2>Sports</h2>
+            </a>
+        </section>
 
-    .green {
-        background-color: #2ECC40; /* Green */
-    }
-
-    .yellow {
-        background-color: #FFDC00; /* Yellow */
-    }
-
-    .blue {
-        background-color: #0074D9; /* Blue */
-    }
-
-    .white {
-        background-color: #FFFFFF; /* White */
-        color: black;
-    }
-</style>
-
-
-<div class="dashboard">
-    <a href="{{ url_for('engineering') }}" class="box red">
-        <h2>Engineering</h2>
-    </a>
-    <a href="{{ url_for('sports') }}" class="box green">
-        <h2>History</h2>
-    </a>
-    <a href="{{ url_for('history') }}" class="box yellow">
-        <h2>Sciences</h2>
-    </a>
-    <a href="{{ url_for('stories') }}" class="box blue">
-        <h2>Sports</h2>
-    </a>
-    <a href="{{ url_for('sciences') }}" class="box white">
-        <h2>Stories</h2>
-    </a>
-</div>
-
+        <section class="category white">
+            <a href="{{ url_for('sciences') }}">
+                <h2>Stories</h2>
+            </a>
+        </section>
+    </div>
 {% endblock %}

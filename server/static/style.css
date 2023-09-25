@@ -34,3 +34,50 @@ header img {
     flex-grow: 1; /* Make each box grow to fill available space */
     height: 10%; /* Set height to 10% of the screen */
 }
+
+.dashboard {
+    width: 66.66%; /* 2/3 of the screen width */
+    float: left;
+    margin: 0;
+}
+
+.category {
+    margin: 7px;
+    padding: 7px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 70%;
+    height: 4%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    color: black;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.category:hover {
+    background-color: #000000; /* Darken to black color */
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.red {
+    background-color: #FF4136;
+}
+
+.green {
+    background-color: #2ECC40;
+}
+
+.yellow {
+    background-color: #FFDC00;
+}
+
+.blue {
+    background-color: #0074D9;
+}
+
+.white {
+    background-color: #FFFFFF;
+    color: black;
+}
