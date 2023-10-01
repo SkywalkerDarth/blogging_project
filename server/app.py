@@ -29,6 +29,27 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/image1_details')
+def image1_details():
+    return render_template('image1_details.html')
+
+@app.route('/image2_details')
+def image2_details():
+    return render_template('image2_details.html')
+
+@app.route('/image3_details')
+def image3_details():
+    return render_template('image3_details.html')
+
+@app.route('/image4_details')
+def image4_details():
+    return render_template('image4_details.html')
+
+@app.route('/image5_details')
+def image5_details():
+    return render_template('image5_details.html')
+
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':

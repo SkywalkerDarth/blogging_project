@@ -1,29 +1,106 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dante's Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <style>
+        .nav-list {
+            margin-left: 20px; /* Add some space before the links */
+        }
+        .image-container img {
+            width: 100%; /* Make all images the same size */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <header class="logo">
+    <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" style="width: 50px; height: auto;">
+    Dante's Blogging Website
+   </header>
+    <header class="header">
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/login">Login</a></li>
+                <li class="nav-item"><a href="/signup">Signup</a></li>
+                <li class="nav-item"><a href="/recovery">Recovery</a></li>
+            </ul>
+        </nav>
+    </header>
 
-{% block content %}
+    <main class="main-content">
+        <div class="image-container">
+            <!-- Image 1 -->
+            <div class="image-box" onclick="expandImage(this)">
+                <img src="{{ url_for('static', filename='image1.png') }}" alt="Image1">
+                <div class="overlay"></div>
+                <div class="image-info">
+                    <h3>Image 1</h3>
+                    <p>
+                        Alexander III of Macedon, commonly known as Alexander the Great, was a king of the ancient Greek kingdom of Macedon...
+                        <a href=<a href="{{ url_for('image1_details') }}">Continue Reading</a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Image 2 -->
+            <div class="image-box" onclick="expandImage(this)">
+                <img src="{{ url_for('static', filename='image2.png') }}" alt="Image2">
+                <div class="overlay"></div>
+                <div class="image-info">
+                    <h3>Image 2</h3>
+                    <p>
+                        Carnot Cycle is the maximum possible efficiency of a heat engine operating between two reservoirs at different temperatures...
+			<a href="{{ url_for('image2_details') }}">Continue Reading</a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Image 3 -->
+            <div class="image-box" onclick="expandImage(this)">
+                <img src="{{ url_for('static', filename='image3.jpg') }}" alt="Image3">
+                <div class="overlay"></div>
+                <div class="image-info">
+                    <h3>Image 3</h3>
+                    <p>
+                        Reading novels and stories expands our ability to think and visualize, it leads you down the path of the writer to get the lesson of the story needed...
+                        <a href="{{ url_for('image3_details') }}">Continue Reading</a>
+                    </p>
+                </div>
+            </div>
 
- <div class="image-container">
-        <img src="{{ url_for('static', filename='image1.png') }}" alt="Image1">
-        <img src="{{ url_for('static', filename='image2.png') }}" alt="Image2">
-        <img src="{{ url_for('static', filename='image3.jpg') }}" alt="Image3">
-    </div>
+            <!-- Image 4 -->
+            <div class="image-box" onclick="expandImage(this)">
+                <img src="{{ url_for('static', filename='image4.png') }}" alt="Image4">
+                <div class="overlay"></div>
+                <div class="image-info">
+                    <h3>Image 4</h3>
+                    <p>
+                        The Kepler's law of planetary motions is very important in the study of motion of planets in the solar systems. There are 3 laws... 
+                        <a href="{{ url_for('image4_details') }}">Continue Reading</a>
+                    </p>
+                </div>
+	    <!-- Image 5 -->
+            <div class="image-box" onclick="expandImage(this)">
+                <img src="image5.png" alt="Image5">
+                <div class="overlay"></div>
+                <div class="image-info">
+                    <h3>Image 5</h3>
+                    <p>
+                        Reservoir simulation is an important part of Petroleum Engineering. It involves a complex process for Reservoir Engineers this involves the input of static models gotten from production seismologist, production geology, and petrophysicist, then Production data(History), pvt modelling(Fluid Data), Relative Permeability modelling(Rock Data), are imputed to initialize the model, well data is added and history matching is made to validate model input and then it is used for prediction based on various development strategies. It is a very interesting part of Reservoir Engineering that inputs all knowledge on Reservoir Engineering...
+                        <a href="{{ url_for('image5_details') }}">Continue Reading</a>
+                    </p>
+                </div>
+            </div>
 
-    <div class="image-container">
-        <img src="{{ url_for('static', filename='image4.png') }}" alt="Image4">
-        <img src="{{ url_for('static', filename='image5.png') }}" alt="Image5">
-        <img src="{{ url_for('static', filename='image6.png') }}" alt="Image6">
-    </div>
-
-    <div class="stacked-boxes">
-        <div class="box">
-            <a href="/login">Login</a>
         </div>
-        <div class="box">
-            <a href="/signup">Signup</a>
-        </div>
-        <div class="box">
-            <a href="/recovery">Recovery</a>
-        </div>
-    </div>
+    </main>
 
-{% endblock %}
+    <footer class="footer">
+        <p>© Dante's Blog 2023</p>
+    </footer>
+</body>
+</html>

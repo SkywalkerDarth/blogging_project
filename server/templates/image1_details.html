@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image 1 Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="{{ url_for('login') }}">Login</a></li>
+                <li class="nav-item"><a href="{{ url_for('signup') }}">Signup</a></li>
+                <li class="nav-item"><a href="{{ url_for('recovery') }}">Recovery</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+	    
+	<main class="main-content">
+        <div class="image-container">
+            <!-- Image 1 -->
+            <div class="image-box">
+                <img src="image1.png" alt="Image1">
+            </div>
+        </div>
+
+        <div class="image-details">
+            <h1>Image 1 Details</h1>
+            <p>
+                Alexander III of Macedon, commonly known as Alexander the Great, was a king of the ancient Greek kingdom of Macedon. He succeeded his father Philip II to the throne in 336 BC at the age of 20. He won about 20 battles conquering much of the known world in his time with his well disciplined army. His versatile force included heavily armed foot soldier who wielded spears and formed a phalanx, advancing relentlessly behind raised shields. One of his most significant victory is that of the Persian King Darius III.
+            </p>
+            <!-- Embed the PDF -->
+            </div>
+    </main>
+
+    <footer class="footer">
+        <p>© Dantes Blog</p>
+    </footer>
+</body>
+</html>
