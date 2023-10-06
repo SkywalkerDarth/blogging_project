@@ -2,6 +2,21 @@
 
 {% block content %}
     <div class="dashboard">
+	<section class="user-bio">
+        <h2>{{ username }}</h2>
+        <p>Interests: {{ user_interests }}</p>
+        <p>Articles Posted: {{ articles_count }}</p>
+	</section>
+
+	<form action="{{ url_for('update_profile') }}" method="post">
+    <label for="bio">Bio:</label>
+    <textarea name="bio" id="bio">{{ current_user.bio }}</textarea>
+    <label for="interests">Interests:</label>
+    <input type="text" name="interests" id="interests" value="{{ current_user.interests }}">
+    <button type="submit">Update Profile</button>
+</form>
+
+
         <section class="category red">
             <a href="{{ url_for('engineering') }}">
                 <h2>Engineering</h2>

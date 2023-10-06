@@ -12,7 +12,6 @@
             <ul class="nav-list">
                 <li class="nav-item"><a href="{{ url_for('login') }}">Login</a></li>
                 <li class="nav-item"><a href="{{ url_for('signup') }}">Signup</a></li>
-                <li class="nav-item"><a href="{{ url_for('recovery') }}">Recovery</a></li>
             </ul>
         </nav>
     </header>
@@ -23,14 +22,15 @@
         <div class="image-container">
             <!-- Image 1 -->
             <div class="image-box">
-                <img src="image1.png" alt="Image1">
+                <img src="image5.png" alt="Image5">
             </div>
         </div>
 
         <div class="image-details">
-            <h1>Image 1 Details</h1>
+            <h1>Reservoir Engineering</h1>
             <p>
-                Alexander III of Macedon, commonly known as Alexander the Great, was a king of the ancient Greek kingdom of Macedon. He succeeded his father Philip II to the throne in 336 BC at the age of 20. He won about 20 battles conquering much of the known world in his time with his well disciplined army. His versatile force included heavily armed foot soldier who wielded spears and formed a phalanx, advancing relentlessly behind raised shields. One of his most significant victory is that of the Persian King Darius III.
+	    Reservoir simulation is an important part of Petroleum Engineering. It involves a complex process for Reservoir Engineers this involves the input of static models gotten from production seismologist, production geology, and petrophysicist, then Production data(History), pvt modelling(Fluid Data), Relative Permeability modelling(Rock Data), are imputed to initialize the model, well data is added and history matching is made to validate model input and then it is used for prediction based on various development strategies. It is a very interesting part of Reservoir Engineering that inputs all knowledge on Reservoir Engineering...
+            <a href="{{ url_for('image5_details') }}">Continue Reading</a>
             </p>
             <!-- Embed the PDF -->
             <iframe src="{{ url_for('static', filename='file_data/landing_page/image_1.pdf') }}" width="100%" height="600"></iframe>

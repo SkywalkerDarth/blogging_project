@@ -10,11 +10,20 @@ login_manager.init_app(app)
 user_manager = UserManager('users.json')
 
 class User(UserMixin):
-    def __init__(self, user_id, username, password):
+    def __init__(self, user_id, username, password, bio='', interests='', posts=[]):
         self.id = user_id
         self.username = username
         self.password = password
+        self.bio = bio
+        self.interests = interests
+        self.posts = posts
 
+    def update_profile(self, bio, interests):
+        self.bio = bio
+        self.interests = interests
+
+    def add_post(self, post):
+        self.posts.append(post)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -92,6 +101,27 @@ def signup():
     return render_template('signup.html')
 
 
+@app.route('/profile/<username>')
+def view_profile(username):
+    user = user_manager.get_user_by_username(username)
+    if user:
+        return render_template('profile.html', user=user)
+    else:
+        flash('User not found', 'error')
+        return redirect(url_for('index'))
+
+
+@app.route('/profile/update', methods=['POST'])
+@login_required
+def update_profile():
+    bio = request.form.get('bio')
+    interests = request.form.get('interests')
+
+    current_user.update_profile(bio, interests)
+
+    flash('Profile updated successfully!', 'success')
+    return redirect(url_for('view_profile', username=current_user.username))
+
 
 @app.route('/api/get_username', methods=['GET'])
 @login_required
@@ -103,6 +133,40 @@ def get_username():
 @login_required
 def dashboard():
     return render_template('dashboard.html', username=current_user.username)
+
+
+
+@app.route('/petroleum')
+@login_required
+def petroleum():
+    return render_template('mechanical.html', username=current_user.username)
+
+
+
+@app.route('/mechanical')
+@login_required
+def mechanical():
+    return render_template('mechanical.html', username=current_user.username)
+
+
+
+@app.route('/electrical')
+@login_required
+def electrical():
+    return render_template('electrical.html', username=current_user.username)
+
+
+@app.route('/civil')
+@login_required
+def civil():
+    return render_template('civil.html', username=current_user.username)
+
+
+@app.route('/chemical')
+@login_required
+def chemical():
+    return render_template('chemical.html', username=current_user.username)
+
 
 @app.route('/logout')
 @login_required

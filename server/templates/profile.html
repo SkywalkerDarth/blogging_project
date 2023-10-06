@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="profile">
+        <h1>{{ user.username }}</h1>
+        <h2>Bio:</h2>
+        <p>{{ user.bio }}</p>
+        <h2>Interests:</h2>
+        <p>{{ user.interests }}</p>
+        <h2>Posts:</h2>
+        <ul>
+            {% for post in user.posts %}
+                <li>{{ post }}</li>
+            {% endfor %}
+	</ul>
+    </div>
+{% endblock %}
